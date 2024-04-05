@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:vpn_new_ui/countries_list/countries_list_tab_bar.dart';
+import 'package:vpn_new_ui/onboarding/onboarding_page.dart';
 import 'package:vpn_new_ui/subscription_notification/subscription_notification.dart';
+import 'package:vpn_new_ui/user_profile/user_profile_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +14,95 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return const MaterialApp(home: StartNavigationPage());
+  }
+}
+
+class StartNavigationPage extends StatelessWidget {
+  const StartNavigationPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
+            },
+            child: const Text(
+              'Баннер',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CountryListTabBarTest()));
+            },
+            child: const Text(
+              'Табы',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      OnBoardingPage(onBuy: () {}, onSkip: () {}),
+                ),
+              );
+            },
+            child: const Text(
+              'Онбординг',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UserProfilePage(
+                    email: 'email@mail.com',
+                    validUntil: 'до 31.08.2023',
+                    subscriptionType: 'Premium + Выделенный IP',
+                    onIconTap: () {},
+                  ),
+                ),
+              );
+            },
+            child: const Text(
+              'Профиль',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          )
+        ],
+      )),
     );
   }
 }
@@ -55,6 +146,13 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 200),
@@ -81,6 +179,48 @@ class _HomePageState extends State<HomePage>
             ),
           )),
         ],
+      ),
+    );
+  }
+}
+
+class CountryListTabBarTest extends StatefulWidget {
+  const CountryListTabBarTest({super.key});
+
+  @override
+  State<CountryListTabBarTest> createState() => _CountryListTabBarTestState();
+}
+
+class _CountryListTabBarTestState extends State<CountryListTabBarTest>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 70),
+        child: CountryListTabBar(
+          tabController: _tabController!,
+          dedicatedIpCountryList: const SizedBox(),
+          dynamicIpContryList: const SizedBox(),
+          multihopContryList: const SizedBox(),
+          staticIpCountryList: const SizedBox(),
+        ),
       ),
     );
   }
