@@ -85,9 +85,10 @@ class StartNavigationPage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => UserProfilePage(
                     email: 'email@mail.com',
-                    validUntil: 'до 31.08.2023',
+                    validUntil: '31.08.2023',
                     subscriptionType: 'Premium + Выделенный IP',
                     onIconTap: () {},
+                    onLogoutTap: () {},
                   ),
                 ),
               );

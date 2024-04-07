@@ -1,4 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,21 +31,31 @@ class OnBoardingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'PREMIUM-подписка',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
+            SizedBox(
+              height: 40,
+              width: MediaQuery.of(context).size.width - 36,
+              child: const AutoSizeText(
+                'PREMIUM-подписка',
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+              ),
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Откройте все возможности NULL END и обходите любые ограничения',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
+            const SizedBox(height: 7),
+            SizedBox(
+              height: 60,
+              width: MediaQuery.of(context).size.width - 36,
+              child: const AutoSizeText(
+                'Откройте все возможности NULL END и обходите любые ограничения',
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
               ),
             ),
             const SizedBox(height: 30),
@@ -120,54 +133,64 @@ class OnBoardingInfoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: isBig ? 97 : 78,
-      color: const Color.fromARGB(255, 20, 20, 20),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 23),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  imagePath,
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        subtitle,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 114, 114, 114),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
+    return IntrinsicHeight(
+      child: Container(
+        color: const Color.fromARGB(255, 20, 20, 20),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 23, vertical: isBig ? 20 : 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SvgPicture.asset(
+                    imagePath,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 25,
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: AutoSizeText(
+                            title,
+                            maxLines: 1,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width / 1.8,
+                          child: AutoSizeText(
+                            subtitle,
+                            maxLines: 2,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Color.fromARGB(255, 114, 114, 114),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                  height: isBig ? 97 : 78,
-                  width: 2,
-                  color: const Color.fromARGB(255, 114, 114, 114)))
-        ],
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    width: 2, color: const Color.fromARGB(255, 114, 114, 114)))
+          ],
+        ),
       ),
     );
   }

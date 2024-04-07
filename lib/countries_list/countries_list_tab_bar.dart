@@ -110,6 +110,7 @@ class _CountryListTabBarState extends State<CountryListTabBar>
                   const SizedBox(height: 10),
                   const Text(
                     'IP-адрес, принадлежащий только вам',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,
@@ -124,6 +125,7 @@ class _CountryListTabBarState extends State<CountryListTabBar>
                   const SizedBox(height: 10),
                   const Text(
                     'IP-адрес сохраняется в рамках одной сессии',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,
@@ -138,6 +140,7 @@ class _CountryListTabBarState extends State<CountryListTabBar>
                   const SizedBox(height: 10),
                   const Text(
                     'Усиленная защита за счет двойной смены IP-адреса',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white,

@@ -1,9 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class UserProfilePage extends StatelessWidget {
   final String subscriptionType;
   final String validUntil;
   final String email;
+  final void Function()? onLogoutTap;
   final void Function()? onIconTap;
   const UserProfilePage({
     super.key,
@@ -11,6 +15,7 @@ class UserProfilePage extends StatelessWidget {
     required this.subscriptionType,
     required this.validUntil,
     required this.onIconTap,
+    required this.onLogoutTap,
   });
 
   @override
@@ -50,12 +55,16 @@ class UserProfilePage extends StatelessWidget {
                     color: Color.fromARGB(255, 114, 114, 114),
                   ),
                 ),
-                Text(
-                  email,
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 60,
+                  child: AutoSizeText(
+                    email,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -72,12 +81,17 @@ class UserProfilePage extends StatelessWidget {
                         color: Color.fromARGB(255, 114, 114, 114),
                       ),
                     ),
-                    Text(
-                      subscriptionType,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                    SizedBox(
+                      height: 35,
+                      width: MediaQuery.of(context).size.width - 100,
+                      child: AutoSizeText(
+                        subscriptionType,
+                        maxLines: 2,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
                     ),
                     Text(
                       'до $validUntil',
@@ -98,7 +112,32 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 )
               ],
-            )
+            ),
+            const Spacer(),
+            GestureDetector(
+              onTap: onLogoutTap,
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 1,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'Выйти из аккаунта',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
