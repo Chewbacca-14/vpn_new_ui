@@ -17,13 +17,13 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      // appBar: AppBar(
+      //   leading: BackButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      // ),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 31),
@@ -88,6 +88,7 @@ class OnBoardingPage extends StatelessWidget {
                     'Приобрести',
                     style: TextStyle(
                       fontSize: 20,
+                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
